@@ -1,0 +1,50 @@
+<div>
+    <button class="btn btn-danger" (click)="onLoad()">Load</button>
+</div>
+<div class="page-header">
+    <div class="list-group">
+        <div *ngFor="let item of products; let idx=index;">
+            <button type="button" class="btn btn-secondary"> #:
+                <span class="badge badge-secondary" [innerText]="idx+1"></span>
+            </button>
+            <div>
+                <h4>Product Name: {{item.name}} </h4>
+                <h5>Original Price: {{item.price}}</h5>
+                <h5>Discount : {{item.discount}}</h5>
+                <button class="btn btn-primary" type="button" *ngIf="item.name" (click)="onbuy(item)">Buy</button>
+                <hr />
+                <section>
+
+                    <h3> Tabs</h3>
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <button class="nav-link" [class.active]="isTabSelected(10+idx)"
+                                (click)="onTabChange($event,10+idx)"> Description
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" [class.active]="isTabSelected(20+idx)"
+                                (click)="onTabChange($event,20+idx)"> Ratings </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" [class.active]="isTabSelected(30+idx)"
+                                (click)="onTabChange($event,30+idx)"> Suggestions </button>
+                        </li>
+
+                    </ul>
+                </section>
+                <div class="panel" *ngIf="isTabSelected(10+idx)">
+                    {{item.description}}
+                </div>
+                <div class="panel" *ngIf="isTabSelected(20+idx)">
+                    Ratings about the product</div>
+                <div class="panel" *ngIf="isTabSelected(30+idx)">
+                    <textarea class="panel"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
